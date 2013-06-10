@@ -37,19 +37,23 @@ EOF
 fi
 
 # cloning and building zotonic
-cd /vagrant
-git clone http://github.com/zotonic/zotonic
+if [ ! -d /zotonic ]; then
+    cd /
+    git clone http://github.com/zotonic/zotonic
 
-cd zotonic
+    # symlink the tutorial website into zotonic's config
+    (cd zotonic/priv/sites && ln -s /vagrant/tutorial)
 
-# symlink the tutorial website into zotonic's config
-(cd priv/sites && ln -s ../../../tutorial)
+fi
 
-# now build it
+# now build it...
+cd /zotonic
 make
 
+chown vagrant:vagrant /zotonic -R
+
 # and start!
-bin/zotonic start
+sudo -u vagrant bin/zotonic start
 
 echo Bootstrap done.
 

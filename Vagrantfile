@@ -38,9 +38,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider "virtualbox" do |v|
     # Enable symlinks in vagrant shared folder, https://coderwall.com/p/b5mu2w
+    v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
     v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant-root", "1"]
     v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant", "1"]
-
   end
   
   # Provider-specific configuration so you can fine-tune various
