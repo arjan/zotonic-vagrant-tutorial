@@ -41,7 +41,15 @@ cd /vagrant
 git clone http://github.com/zotonic/zotonic
 
 cd zotonic
+
+# symlink the tutorial website into zotonic's config
+(cd priv/sites && ln -s ../../../tutorial)
+
+# now build it
 make
+
+# and start!
+bin/zotonic start
 
 echo Bootstrap done.
 

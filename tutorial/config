@@ -1,0 +1,31 @@
+%% Zotonic site configuration for the EUC 2013 tutorial.
+[
+ %% This site is enabled or not.
+ {enabled, true},
+
+ %% Hostname on which this site runs
+ {hostname, "localhost:8000"},
+
+ %% Aliases which should redirect to the primary hostname
+ %%{hostalias, "www.example.com"},
+ %%{hostalias, "example.com"},
+
+ %% PostgreSQL database connection
+ {dbhost, "localhost"},
+ {dbport, 5432},
+ {dbuser, "zotonic"},
+ {dbpassword, "zotonic"},
+ {dbdatabase, "zotonic"},
+ {dbschema, "tutorial"},
+
+ %% Depcache settings. The maximum size in Mbs
+ {depcache_memory_max, 100},
+
+ %% Password for the 'admin' user.
+ {admin_password, "admin"},
+
+ %% What skeleton site this site is based on; for installing the initial data.
+ {skeleton, basesite},
+
+ {title, "Zotonic tutorial - EUC 2013"}
+].
