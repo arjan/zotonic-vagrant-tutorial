@@ -4,7 +4,7 @@
 apt-get -y update
 apt-get -y install \
     ack-grep build-essential git curl \
-    imagemagick postgresql-9.1 postgresql-client-9.1 erlang-nox
+    imagemagick postgresql-9.1 postgresql-client-9.1 erlang-nox inotify-tools
 
 echo
 
@@ -53,7 +53,13 @@ make
 chown vagrant:vagrant /zotonic -R
 
 # and start!
-sudo -u vagrant bin/zotonic start
+#sudo -u vagrant bin/zotonic start
 
-echo Bootstrap done.
+echo Done! Now, SSH into your vagrant box ("vagrant ssh") and type the following:
+echo
+echo cd /zotonic
+echo bin/zotonic debug
+echo
+echo Then, visit http://localhost:8000 on the host machine. Let's go!
+echo
 
