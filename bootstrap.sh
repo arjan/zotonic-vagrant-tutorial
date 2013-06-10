@@ -4,9 +4,7 @@
 apt-get -y update
 apt-get -y install \
     ack-grep build-essential git curl \
-    imagemagick postgresql-9.1 postgresql-client-9.1 \
-    erlang-base erlang-tools erlang-parsetools erlang-inets \
-    erlang-ssl erlang-eunit erlang-dev erlang-xmerl
+    imagemagick postgresql-9.1 postgresql-client-9.1 erlang-nox
 
 echo
 
@@ -31,13 +29,19 @@ ENCODING 'UTF-8'
 LC_CTYPE 'en_US.utf8'
 LC_COLLATE 'en_US.utf8'
 TEMPLATE template0;
-# optional: if you have multiple sites running on the same db
+-- Create the schema for the tutorial site
 \c zotonic
-CREATE SCHEMA test_site;
-ALTER SCHEMA test_site OWNER TO zotonic;
+CREATE SCHEMA tutorial;
+ALTER SCHEMA tutorial OWNER TO zotonic;
 EOF
 fi
 
+# cloning and building zotonic
+cd /vagrant
+git clone http://github.com/zotonic/zotonic
+
+cd zotonic
+make
+
 echo Bootstrap done.
 
-# intially, you might want to clone zotonic here too: git clone http://github.com/zotonic/zotonic
