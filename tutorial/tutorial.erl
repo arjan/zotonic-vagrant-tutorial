@@ -25,7 +25,7 @@
 
 -include_lib("zotonic.hrl").
 
--export([manage_schema/2]).
+-export([manage_schema/2, event/2]).
 
 %%====================================================================
 %% API functions go here
@@ -52,6 +52,12 @@ manage_schema(install, _Context) ->
                       ]}
                     ]
         }.
+
+
+%% @doc Event handling function
+event(#postback{message={feedback_form, _}}, Context) ->
+    lager:warning("Hello!"),
+    Context.
 
 
 %%====================================================================
