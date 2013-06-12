@@ -60,7 +60,13 @@ event(#submit{message={feedback_form, _Args}}, Context) ->
     Message = z_context:get_q("message", Context),
     lager:warning("Email: ~p", [Email]),
     lager:warning("Message: ~p", [Message]),
-    Context.
+
+    Vars = [{email, Email},
+            {message, Message}],
+
+    z_email:send_render("arjan@miraclethings.nl", "email_contact.tpl", Vars, Context),
+
+    z_render:update("feedback-area", "<p class='alert alert-info'>Thanks!! An e-mail has been sent.</p>", Context).
 
 
 %%====================================================================
