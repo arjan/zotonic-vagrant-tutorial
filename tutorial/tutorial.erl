@@ -49,7 +49,12 @@ manage_schema(install, _Context) ->
                       [{title, <<"Projects">>},
                        {page_path, <<"/projects">>},
                        {'query', <<"cat=project\nsort=-publication_start">>}
-                      ]}
+                      ]},
+
+                     {myself,
+                      person,
+                      [{title, <<"John 'your name here' Doe">>}]
+                     }
                     ]
         }.
 
@@ -71,9 +76,22 @@ event(#submit{message={feedback_form, _Args}}, Context) ->
 
 
 %% @doc This notification function gets triggered on the update of any resource.
-observe_rsc_update_done(#rsc_update_done{id=Id, post_is_a=Categories}, _Context) ->
+observe_rsc_update_done(#rsc_update_done{id=Id, post_is_a=Categories}, Context) ->
     lager:warning("Update the resource ~p which is a: ~p", [Id, Categories]),
-    undefined.
+     
+    case Categories of
+        [project] ->
+            %% updating a project; ensure there is an edge from this
+            %% project to the person with the name 'myself':
+
+            Myself = m_rsc:name_to_id_check(myself, Context),
+            lager:warning("Myself: ~p", [Myself]),
+            
+            
+            undefined;
+        _ ->
+            undefined
+    end.
 
 %%====================================================================
 %% support functions go here
