@@ -40,7 +40,17 @@ manage_schema(install, _Context) ->
                       {project,
                        undefined,
                        [{title, <<"Project">>}]}
-                     ]
+                     ],
+
+          resources=[
+                     %% The page at /projects is a listing of all pages of category 'project'
+                     {page_projects,
+                      'query',
+                      [{title, <<"Projects">>},
+                       {page_path, <<"/projects">>},
+                       {'query', <<"cat=project\nsort=-publication_start">>}
+                      ]}
+                    ]
         }.
 
 
