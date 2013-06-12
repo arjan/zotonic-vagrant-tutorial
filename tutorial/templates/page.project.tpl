@@ -12,7 +12,7 @@
 
     {# loop over the images #}
     {% for id in id.o.depiction %}
-        {% print id %}
+        {% image id width=200 %}
     {% endfor %}
     
 {% endblock %}
