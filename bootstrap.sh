@@ -55,11 +55,11 @@ chown vagrant:vagrant /zotonic -R
 # and start!
 #sudo -u vagrant bin/zotonic start
 
-echo Done! Now, SSH into your vagrant box ("vagrant ssh") and type the following:
+echo "Done! Now, SSH into your vagrant box (\"vagrant ssh\") and type the following:"
 echo
 echo cd /zotonic
 echo bin/zotonic debug
 echo
-echo Then, visit http://localhost:8000 on the host machine. Let's go!
+echo 'Then, visit http://localhost:8000 on the host machine. Lets go!'
 echo
 
