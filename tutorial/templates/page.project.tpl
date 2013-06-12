@@ -1,13 +1,15 @@
 {% extends "page.tpl" %}
 
-{% block content %}
-    Hello, this is a project
+{% block main %}
 
-    My title is:
-    <h1>{{ id.title }}</h1>
+	{% include "_meta.tpl" %}
+    
+    <p><b>{{ id.summary }}</b></p>
 
-    Another way to put that:
-    <h1>{{ m.rsc[id].title }}</h1>
+    {{ id.body|show_media }}
 
-    (which explicitly uses the "m_rsc" model)
+    <hr />
+
+    Let's do some stuff here!
+    
 {% endblock %}
