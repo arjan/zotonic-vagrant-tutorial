@@ -86,8 +86,17 @@ observe_rsc_update_done(#rsc_update_done{id=Id, post_is_a=Categories}, Context) 
 
             Myself = m_rsc:name_to_id_check(myself, Context),
             lager:warning("Myself: ~p", [Myself]),
-            
-            
+
+            case m_edge:get_id(Id, author, Myself, Context) of
+                undefined ->
+                    %% not here yet, create it
+                    lager:warning("Creating author edge for project"),
+                    
+                    m_edge:insert(Id, author, Myself, Context);
+                _ ->
+                    %% already exists
+                    undefined
+            end,
             undefined;
         _ ->
             undefined
