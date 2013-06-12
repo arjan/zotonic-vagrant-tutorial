@@ -10,6 +10,9 @@
 
     <hr />
 
-    Let's do some stuff here!
+    {# loop over the images #}
+    {% for id in id.o.depiction %}
+        {% print id %}
+    {% endfor %}
     
 {% endblock %}
