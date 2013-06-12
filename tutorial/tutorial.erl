@@ -21,11 +21,31 @@
 -mod_title("tutorial zotonic site").
 -mod_description("An empty Zotonic site, to base your site on.").
 -mod_prio(10).
+-mod_schema(1).
 
 -include_lib("zotonic.hrl").
+
+-export([manage_schema/2]).
+
+%%====================================================================
+%% API functions go here
+%%====================================================================
+
+
+%% @doc Installs the initial domain model for this site.
+manage_schema(install, _Context) ->
+    #datamodel
+        {
+          categories=[
+                      {project,
+                       undefined,
+                       [{title, <<"Project">>}]}
+                     ]
+        }.
 
 
 %%====================================================================
 %% support functions go here
 %%====================================================================
+
 
