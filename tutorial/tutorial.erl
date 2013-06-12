@@ -55,8 +55,11 @@ manage_schema(install, _Context) ->
 
 
 %% @doc Event handling function
-event(#postback{message={feedback_form, _}}, Context) ->
-    lager:warning("Hello!"),
+event(#submit{message={feedback_form, _Args}}, Context) ->
+    Email = z_context:get_q_validated("email", Context),
+    Message = z_context:get_q("message", Context),
+    lager:warning("Email: ~p", [Email]),
+    lager:warning("Message: ~p", [Message]),
     Context.
 
 
