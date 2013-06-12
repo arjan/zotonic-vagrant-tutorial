@@ -25,7 +25,7 @@
 
 -include_lib("zotonic.hrl").
 
--export([manage_schema/2, event/2]).
+-export([manage_schema/2, event/2, observe_rsc_update_done/2]).
 
 %%====================================================================
 %% API functions go here
@@ -54,7 +54,7 @@ manage_schema(install, _Context) ->
         }.
 
 
-%% @doc Event handling function
+%% @doc Event handling function; handles form submits etc.
 event(#submit{message={feedback_form, _Args}}, Context) ->
     Email = z_context:get_q_validated("email", Context),
     Message = z_context:get_q("message", Context),
@@ -68,6 +68,12 @@ event(#submit{message={feedback_form, _Args}}, Context) ->
 
     z_render:update("feedback-area", "<p class='alert alert-info'>Thanks!! An e-mail has been sent.</p>", Context).
 
+
+
+%% @doc This notification function gets triggered on the update of any resource.
+observe_rsc_update_done(#rsc_update_done{id=Id, post_is_a=Categories}, _Context) ->
+    lager:warning("Update the resource ~p which is a: ~p", [Id, Categories]),
+    undefined.
 
 %%====================================================================
 %% support functions go here
